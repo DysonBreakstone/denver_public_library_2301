@@ -4,7 +4,7 @@ require './lib/library'
 
 RSpec.describe Library do
   before(:each) do
-    @library_1 = Library.new
+    @library_1 = Library.new("Denver Public Library")
     @author_1 = Author.new({first_name: "John", last_name: "Man"})
     @author_2 = Author.new({first_name: "Lindsay", last_name: "Lady"})
     @book_1 = @author_1.write("Fancy Book", "January 23 1945")
@@ -16,6 +16,7 @@ RSpec.describe Library do
 
   it "exists" do
     expect(@library_1).to be_a(Library)
+    expect(@library_1.name).to eq("Denver Public Library")
   end
 
   it "has attributes" do
