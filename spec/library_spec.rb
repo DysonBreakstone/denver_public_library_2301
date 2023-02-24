@@ -38,4 +38,30 @@ RSpec.describe Library do
     expect(@library_1.publication_time_frame_for(@author_1)).to eq({:start=>"1922", :end=>"1945"})
     expect(@library_1.publication_time_frame_for(@author_2)).to eq({:start=>"1985", :end=>"1999"})
   end
+
+  describe "checking out" do
+    before(:each) do
+      @library_1 = Library.new("Denver Public Library")
+      @author_1 = Author.new({first_name: "John", last_name: "Man"})
+      @author_2 = Author.new({first_name: "Lindsay", last_name: "Lady"})
+      @book_1 = @author_1.write("Fancy Book", "January 23 1945")
+      @book_2 = @author_1.write("Sinister Book", "1922")
+      @book_3 = @author_2.write("Happy Book", "April 23 1985")
+      @book_4 = @author_2.write("Scary Book", "August 18 1992")
+      @book_5 = @author_2.write("Thoughtful Book", "January 24, 1999")
+    end
+
+    it "can check out books" do
+      expect(@library_1.checkout_out_books.length).to eq(0)
+      expect(@library_1).available?(@book_1).to eq(true)
+      
+      @library_1.check_out(@book_1)
+      
+      expect(@book_1.checked_out).to be(true)
+      expect(@library_1.checked_out_books.length).to eq(1)
+      expect(@library_1.checkout_out_books[0]).to eq eq(@book_1)
+
+      expect(@library_1.available?(@book_1)).to eq(false)
+    end
+  end
 end
