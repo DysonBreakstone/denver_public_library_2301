@@ -16,4 +16,9 @@ RSpec.describe Book do
     expect(@book_1.publication_year).to eq("1979")
   end
 
+  it "can accept a puclication date with only a year" do
+    book_2 = Book.new({author_first_name: "John", author_last_name: "Crowley", title: "Engine Summer", publication_date: "1979"})
+    expect(book_2.publication_year).to eq("1979")
+  end
+
 end
