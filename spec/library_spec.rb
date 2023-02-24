@@ -28,11 +28,13 @@ RSpec.describe Library do
     @library_1.add_author(@author_2)
 
     expect(@library_1.authors.length).to eq(2)
+    expect(@library_1.authors[0]).to be_a(Author)
     expect(@library_1.books.length).to eq(5)
+    expect(@library_1.books[0]).to be_a(Book)
   end
 
   it "can report author's time frame" do
     expect(@library_1.publication_time_frame_for(@author_1)).to eq({:start=>"1922", :end=>"1945"})
-    expect(@library_1.publication_time_frame_for(@author_2)).to eq({:start=>"1985", :end=>"1945"})
+    expect(@library_1.publication_time_frame_for(@author_2)).to eq({:start=>"1985", :end=>"1999"})
   end
 end
