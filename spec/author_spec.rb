@@ -1,12 +1,12 @@
 require './lib/book'
-require './lib/book'
+require './lib/author'
 
 RSpec.describe Author do
   
   describe "instantiation" do
     before(:each) do 
       @author_1 = Author.new({first_name: "John", last_name: "Man"})
-      @author_2 = Author.new({first_name: "Lindsay" last_name: "Lady"})
+      @author_2 = Author.new({first_name: "Lindsay", last_name: "Lady"})
     end
     
     it "exists" do
@@ -28,7 +28,7 @@ RSpec.describe Author do
   describe "write" do
     before(:each) do 
       @author_1 = Author.new({first_name: "John", last_name: "Man"})
-      @author_2 = Author.new({first_name: "Lindsay" last_name: "Lady"})
+      @author_2 = Author.new({first_name: "Lindsay", last_name: "Lady"})
     end
 
     it "can write books" do
@@ -39,7 +39,8 @@ RSpec.describe Author do
 
       book_2 = @author_1.write("Sinister Book", "1922")
      
-      expect(@author_1.books.length).to eq(2)
+      expect(@author_1.books.length).to eq(2) 
+      expect(@author_1.books[0]).to be_a(Book)
     end
   end
 end
