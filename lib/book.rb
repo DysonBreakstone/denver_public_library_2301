@@ -2,7 +2,7 @@ class Book
   
   attr_reader :title, :author, :publication_year
 
-  attr_accessor :@checked_out
+  attr_accessor :checked_out
 
   def initialize(info_hash)
     # require 'pry'; binding.pry

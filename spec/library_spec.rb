@@ -52,16 +52,25 @@ RSpec.describe Library do
     end
 
     it "can check out books" do
-      expect(@library_1.checkout_out_books.length).to eq(0)
-      expect(@library_1).available?(@book_1).to eq(true)
+      expect(@library_1.checked_out_books.length).to eq(0)
+      expect(@library_1.available?(@book_1)).to eq(true)
       
       @library_1.check_out(@book_1)
       
-      expect(@book_1.checked_out).to be(true)
+      expect(@book_1.checked_out).to eq(true)
       expect(@library_1.checked_out_books.length).to eq(1)
-      expect(@library_1.checkout_out_books[0]).to eq eq(@book_1)
-
+      expect(@library_1.checked_out_books[0]).to eq(@book_1)
       expect(@library_1.available?(@book_1)).to eq(false)
+    end
+
+    it "can return books" do
+      @library_1.check_out(@book_1)
+
+      @library_1.return(@book_1)
+
+      expect(@book_1.checked_out).to eq(false)
+      expect(@library_1.checked_out_books.length).to eq(0)
+      expect(@library_1.available?(@book_1)).to eq(true)
     end
   end
 end
